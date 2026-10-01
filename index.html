@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html><head><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Safe Research Assistant - By Joyce</title>
+<style>
+body{font-family:Arial;max-width:650px;margin:20px auto;padding:20px;background:#f5f7ff;color:#333}
+.card{background:white;padding:20px;border-radius:15px;margin-bottom:15px;box-shadow:0 2px 10px #0001}
+button{background:#6c5ce7;color:white;border:0;padding:12px;border-radius:10px;cursor:pointer;width:100%;font-size:16px;font-weight:bold}
+textarea{width:100%;height:90px;border-radius:10px;padding:10px;border:1px solid #ddd;margin:8px 0;box-sizing:border-box}
+.result{margin-top:10px;padding:12px;border-radius:8px;background:#f0f0ff;min-height:20px}
+h2{color:#6c5ce7}
+</style></head><body>
+<h2>🔬 Safe Research Assistant V1</h2>
+<p>By Joyce, 14 y/o from Benghazi, Libya 🇱🇾 | Ethical AI - Checks only, doesn't write</p>
+
+<div class="card">
+<h3>1. فحص الأخطاء</h3>
+<textarea id="t1" placeholder="مثال: This is a reserch about nano sience"></textarea>
+<button onclick="checkGrammar()">فحص الأخطاء</button>
+<div id="r1" class="result">النتيجة تطلع هنا</div>
+</div>
+
+<div class="card">
+<h3>2. فحص التشابه</h3>
+<textarea id="a" placeholder="النص الأصلي"></textarea>
+<textarea id="b" placeholder="نصك انتي"></textarea>
+<button onclick="checkSim()">قارني التشابه</button>
+<div id="r2" class="result">النتيجة تطلع هنا</div>
+</div>
+
+<script>
+function checkGrammar(){
+ let t=document.getElementById('t1').value.toLowerCase();
+ let d={reserch:'research',sience:'science',tecnology:'technology',importent:'important','it are':'it is','are is':'is'};
+ let f=[]; for(let w in d){if(t.includes(w)) f.push(w+' → '+d[w])}
+ document.getElementById('r1').innerHTML=f.length?'⚠️ لقيت:<br>'+f.join('<br>'):'✨ مافيش أخطاء واضحة!';
+}
+function checkSim(){
+ let a=document.getElementById('a').value,b=document.getElementById('b').value;
+ if(!a||!b){document.getElementById('r2').innerHTML='اكتبي النصين';return}
+ let s=0; let l=a.length>b.length?a:b; let sh=a.length>b.length?b:a;
+ for(let i=0;i<sh.length;i++) if(l.includes(sh[i])) s++;
+ let p=((s/l.length)*100).toFixed(1);
+ document.getElementById('r2').innerHTML=p>80?'⚠️ تشابه عالي: '+p+'% - عاودي الكتابة':'✅ ممتاز: '+p+'% - نص أصلي';
+}
+</script>
+</body></html>
